@@ -1,14 +1,7 @@
 import React, { useEffect } from "react";
 import ToDoCard from "./ToDoCard";
-import {
-  Modal,
-  ModalHeader,
-  Textarea,
-  ModalFooter,
-  Button,
-  Input,
-  Label,
-} from "@windmill/react-ui";
+import { Button } from "@windmill/react-ui";
+import AddTask from "./AddTask";
 
 const ToDoContainer = () => {
   useEffect(() => {
@@ -71,11 +64,12 @@ const ToDoContainer = () => {
       .then((r) => r.json())
       .then((r) => refreshList());
   };
+
   const [isModalOpen, setIsModalOpen] = React.useState(false);
 
   const [newTaskTitle, setNewTaskTitle] = React.useState("");
   const [newTaskDesc, setNewTaskDesc] = React.useState("");
-  console.log(newTaskDesc);
+
   const openModal = () => {
     setIsModalOpen(true);
   };
@@ -96,40 +90,15 @@ const ToDoContainer = () => {
         <ToDoCard toDo={t} key={t.id} handleDelete={handleDelete} />
       ))}
       <div>
-        <Button onClick={openModal}>Open modal</Button>
+        <Button onClick={openModal}>New Task</Button>
       </div>
-      <Modal isOpen={isModalOpen} onClose={closeModal}>
-        <ModalHeader>New Task</ModalHeader>
-        <form onSubmit={addTask}>
-          <Label>
-            <span className="ml-2">Title</span>
-            <Input onChange={handleTitle} type="text"></Input>
-          </Label>
-          <Label>
-            <span className="ml-2"></span>
-            <Textarea
-              onChange={handleDescription}
-              className="mt-1"
-              rows="3"
-              placeholder="More about this task."
-              type="text"
-            />
-          </Label>
-
-          <ModalFooter>
-            <Button
-              className="w-full sm:w-auto"
-              layout="outline"
-              onClick={closeModal}
-            >
-              Cancel
-            </Button>
-            <button onClick={closeModal} className="w-full sm:w-auto">
-              Submit
-            </button>
-          </ModalFooter>
-        </form>
-      </Modal>
+      <AddTask
+        addTask={addTask}
+        isModalOpen={isModalOpen}
+        closeModal={closeModal}
+        handleTitle={handleTitle}
+        handleDescription={handleDescription}
+      />
     </div>
   );
 };
