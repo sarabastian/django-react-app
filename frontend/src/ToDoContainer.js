@@ -65,6 +65,24 @@ const ToDoContainer = () => {
       .then((r) => refreshList());
   };
 
+  const toggleCompleted = (toDo) => {
+    fetch(`http://localhost:2000/api/todos/${toDo.id}/`, {
+      method: "PATCH",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        "X-CSRFToken": csrftoken,
+      },
+      body: JSON.stringify({
+        title: toDo.title,
+        description: toDo.description,
+        completed: !isCompleted,
+      }),
+    })
+      .then((r) => r.json())
+      .then((r) => refreshList());
+  };
+
   const [isModalOpen, setIsModalOpen] = React.useState(false);
 
   const [newTaskTitle, setNewTaskTitle] = React.useState("");
@@ -84,10 +102,18 @@ const ToDoContainer = () => {
     setNewTaskDesc(e.target.value);
   };
 
+  const [isCompleted, setIsCompleted] = React.useState(false);
+
   return (
     <div className="mt-8 grid grid-cols-2 gap-4">
       {toDos.map((t) => (
-        <ToDoCard toDo={t} key={t.id} handleDelete={handleDelete} />
+        <ToDoCard
+          toDo={t}
+          key={t.id}
+          handleDelete={handleDelete}
+          toggleCompleted={toggleCompleted}
+          isCompleted={isCompleted}
+        />
       ))}
       <div>
         <Button onClick={openModal}>New Task</Button>

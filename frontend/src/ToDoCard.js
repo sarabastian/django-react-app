@@ -1,7 +1,7 @@
 import React from "react";
-import { Card, CardBody, Button } from "@windmill/react-ui";
+import { Card, CardBody, Button, Input } from "@windmill/react-ui";
 
-const ToDoCard = ({ toDo, handleDelete }) => {
+const ToDoCard = ({ toDo, handleDelete, toggleCompleted, isCompleted }) => {
   return (
     <Card>
       <CardBody>
@@ -25,6 +25,18 @@ const ToDoCard = ({ toDo, handleDelete }) => {
             />
           </svg>
         </Button>
+
+        <p>
+          {toDo.completed ? (
+            <Input
+              onChange={() => toggleCompleted(toDo)}
+              type="checkbox"
+              checked
+            />
+          ) : (
+            <Input onChange={() => toggleCompleted(toDo)} type="checkbox" />
+          )}
+        </p>
       </CardBody>
     </Card>
   );
