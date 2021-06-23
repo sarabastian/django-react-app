@@ -105,27 +105,30 @@ const ToDoContainer = () => {
   const [isCompleted, setIsCompleted] = React.useState(false);
 
   return (
-    <div className="mt-8 grid grid-cols-2 gap-4">
-      {toDos.map((t) => (
-        <ToDoCard
-          toDo={t}
-          key={t.id}
-          handleDelete={handleDelete}
-          toggleCompleted={toggleCompleted}
-          isCompleted={isCompleted}
-        />
-      ))}
-      <div>
+    <>
+      <div className="my-16">
         <Button onClick={openModal}>New Task</Button>
       </div>
-      <AddTask
-        addTask={addTask}
-        isModalOpen={isModalOpen}
-        closeModal={closeModal}
-        handleTitle={handleTitle}
-        handleDescription={handleDescription}
-      />
-    </div>
+      <div className="mt-8 grid grid-cols-2 gap-4">
+        {toDos.map((t) => (
+          <ToDoCard
+            toDo={t}
+            key={t.id}
+            handleDelete={handleDelete}
+            toggleCompleted={toggleCompleted}
+            isCompleted={isCompleted}
+          />
+        ))}
+
+        <AddTask
+          addTask={addTask}
+          isModalOpen={isModalOpen}
+          closeModal={closeModal}
+          handleTitle={handleTitle}
+          handleDescription={handleDescription}
+        />
+      </div>
+    </>
   );
 };
 

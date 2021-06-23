@@ -9,6 +9,21 @@ const ToDoCard = ({ toDo, handleDelete, toggleCompleted, isCompleted }) => {
           {toDo.title}
         </p>
         <p className="text-gray-600 dark:text-gray-400">{toDo.description}</p>
+        <br></br>
+        <p>
+          {" "}
+          completed?{" "}
+          {toDo.completed ? (
+            <Input
+              onChange={() => toggleCompleted(toDo)}
+              type="checkbox"
+              checked
+            />
+          ) : (
+            <Input onChange={() => toggleCompleted(toDo)} type="checkbox" />
+          )}
+        </p>
+        <br></br>
         <Button onClick={() => handleDelete(toDo.id)}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -25,18 +40,6 @@ const ToDoCard = ({ toDo, handleDelete, toggleCompleted, isCompleted }) => {
             />
           </svg>
         </Button>
-
-        <p>
-          {toDo.completed ? (
-            <Input
-              onChange={() => toggleCompleted(toDo)}
-              type="checkbox"
-              checked
-            />
-          ) : (
-            <Input onChange={() => toggleCompleted(toDo)} type="checkbox" />
-          )}
-        </p>
       </CardBody>
     </Card>
   );
