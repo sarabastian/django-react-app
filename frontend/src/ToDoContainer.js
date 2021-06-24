@@ -11,22 +11,22 @@ const ToDoContainer = () => {
   }, []);
 
   const [toDos, setToDos] = React.useState([]);
-  function getCookie(name) {
-    var cookieValue = null;
-    if (document.cookie && document.cookie !== "") {
-      var cookies = document.cookie.split(";");
-      for (var i = 0; i < cookies.length; i++) {
-        var cookie = cookies[i].trim();
-        // Does this cookie string begin with the name we want?
-        if (cookie.substring(0, name.length + 1) === name + "=") {
-          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-          break;
-        }
-      }
-    }
-    return cookieValue;
-  }
-  var csrftoken = getCookie("csrftoken");
+  // function getCookie(name) {
+  //   var cookieValue = null;
+  //   if (document.cookie && document.cookie !== "") {
+  //     var cookies = document.cookie.split(";");
+  //     for (var i = 0; i < cookies.length; i++) {
+  //       var cookie = cookies[i].trim();
+  //       // Does this cookie string begin with the name we want?
+  //       if (cookie.substring(0, name.length + 1) === name + "=") {
+  //         cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+  //         break;
+  //       }
+  //     }
+  //   }
+  //   return cookieValue;
+  // }
+  // var csrftoken = getCookie("csrftoken");
 
   const handleDelete = (id) => {
     fetch(`http://localhost:2000/api/todos/${id}/`, {
@@ -35,7 +35,6 @@ const ToDoContainer = () => {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
-        "X-CSRFToken": csrftoken,
       },
     }).then((r) => refreshList());
   };
@@ -53,7 +52,7 @@ const ToDoContainer = () => {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
-        "X-CSRFToken": csrftoken,
+        // "X-CSRFToken": csrftoken,
       },
       body: JSON.stringify({
         title: newTaskTitle,
@@ -71,7 +70,7 @@ const ToDoContainer = () => {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
-        "X-CSRFToken": csrftoken,
+        // "X-CSRFToken": csrftoken,
       },
       body: JSON.stringify({
         title: toDo.title,
