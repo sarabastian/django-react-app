@@ -70,7 +70,6 @@ const ToDoContainer = () => {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
-        // "X-CSRFToken": csrftoken,
       },
       body: JSON.stringify({
         title: toDo.title,
